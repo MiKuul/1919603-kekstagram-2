@@ -37,6 +37,33 @@ function createRandomNonRepeatingNumber (min, max) {
   };
 }
 
+// функция получения минут из заданного времени
+function getMinutesFromTime (string) {
+  const timeParts = string.split(':');
+  const hours = parseInt(timeParts[0], 10);
+  const minutes = parseInt(timeParts[1], 10);
+
+  return (hours * 60) + minutes;
+}
+
+// функция, в которой гарантируется, что и рабочий день, и встреча укладываются в одни календарные сутки.
+function isWorkingDayAndMeetingFitInOneDay (dayStart, dayEnd, meetingStart, meetingDuration) {
+  const startDay = getMinutesFromTime(dayStart);
+  const endDay = getMinutesFromTime(dayEnd);
+  const startMeeting = getMinutesFromTime(meetingStart);
+  const endMeeting = startMeeting + meetingDuration;
+
+  return (startDay <= startMeeting && endDay >= endMeeting);
+}
+
+// Проверки
+isWorkingDayAndMeetingFitInOneDay('08:00', '17:30', '14:00', 90); // true
+isWorkingDayAndMeetingFitInOneDay('8:0', '10:0', '8:0', 120); // true
+isWorkingDayAndMeetingFitInOneDay('08:00', '14:30', '14:00', 90); // false
+isWorkingDayAndMeetingFitInOneDay('14:00', '17:30', '08:0', 90); // false
+isWorkingDayAndMeetingFitInOneDay('8:00', '17:30', '08:00', 900); // false
+
+// проверки
 checkStringLength('kek', 3);
 isItPolindrom('kek');
 
