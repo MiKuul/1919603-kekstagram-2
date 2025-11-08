@@ -5,7 +5,7 @@ import {getRandomInteger, createRandomNonRepeatingNumber} from './util.js';
 const generateCommentId = createRandomNonRepeatingNumber(1, 1000);
 
 // функция генерации масиива фото-карточек
-function generatePhotoArr () {
+function generatePictureArr () {
   const photoArr = [];
   for(let i = 0; i <= 24; i++) {
     photoArr.push(
@@ -37,4 +37,4 @@ function generateCommentsArr (arrLength) {
   return commentsArr;
 }
 
-export {generatePhotoArr};
+export {generatePictureArr};

@@ -1,3 +1,8 @@
+// Рендерим карточки и сразу присваиваем обработчик,
+// в котором передаем данные для карточки в большом окне
+
+import {openPictureWindow} from './full-pictures-window.js';
+
 const pictureTemplateFragment = document.querySelector('#picture').content;
 const pictureTemplate = pictureTemplateFragment.querySelector('.picture');
 const picturesBlock = document.querySelector('.pictures');
@@ -11,6 +16,10 @@ function renderPictures (arr) {
     pictureElement.querySelector('.picture__likes').textContent = likes;
     pictureElement.querySelector('.picture__comments').textContent = comments.length;
     fragment.append(pictureElement);
+    pictureElement.addEventListener('click', (event) => {
+      event.preventDefault();
+      openPictureWindow(url, description, likes, comments);
+    });
   });
   picturesBlock.append(fragment);
 }
