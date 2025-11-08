@@ -67,4 +67,9 @@ isWorkingDayAndMeetingFitInOneDay('8:00', '17:30', '08:00', 900); // false
 checkStringLength('kek', 3);
 isItPolindrom('kek');
 
-export {getRandomInteger, createRandomNonRepeatingNumber};
+// Если нажали клавишу Esc
+function isEscapeKey (evt) {
+  return evt.key === 'Escape';
+}
+
+export {getRandomInteger, createRandomNonRepeatingNumber, isEscapeKey};
