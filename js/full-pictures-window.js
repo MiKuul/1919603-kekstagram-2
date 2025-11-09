@@ -3,8 +3,7 @@ import {renderComments} from './render-picture-window-comments.js';
 
 const pictureWindow = document.querySelector('.big-picture');
 const closeButtonElement = pictureWindow.querySelector('.big-picture__cancel');
-const commentsCounterElement = pictureWindow.querySelector('.social__comment-count');
-const commentsLoaderElement = pictureWindow.querySelector('.comments-loader');
+const commentsLoader = pictureWindow.querySelector('.comments-loader');
 const bodyElement = document.querySelector('body');
 
 // Закрытие окна по нажатию клавиши Esc
@@ -24,11 +23,31 @@ function openPictureWindow (url, description, likes, comments) {
   pictureWindow.querySelector('img').src = url;
   pictureWindow.querySelector('.likes-count').textContent = likes;
   pictureWindow.querySelector('.social__caption').textContent = description;
+  pictureWindow.querySelector('.social__comment-total-count').textContent = comments.length;
 
-  commentsCounterElement.classList.add('hidden');
-  commentsLoaderElement.classList.add('hidden');
+  let temporaryCommentСount = 5;
 
-  renderComments(comments);
+  if (comments.length <= 5) {
+    renderComments(comments);
+    pictureWindow.querySelector('.social__comment-shown-count').textContent = comments.length;
+  } else {
+    const slicedArr = comments.slice(0, 5);
+    renderComments(slicedArr);
+    pictureWindow.querySelector('.social__comment-shown-count').textContent = 5;
+  }
+
+  commentsLoader.addEventListener('click', () => {
+    if (comments.length - temporaryCommentСount < 0) {
+      const slicedArr = comments.slice(0, comments.length);
+      renderComments(slicedArr);
+      pictureWindow.querySelector('.social__comment-shown-count').textContent = comments.length;
+    } else {
+      const slicedArr = comments.slice(0, temporaryCommentСount);
+      renderComments(slicedArr);
+      pictureWindow.querySelector('.social__comment-shown-count').textContent = temporaryCommentСount;
+      temporaryCommentСount += 5;
+    }
+  });
 }
 
 // Закрытие большого окна карточки
