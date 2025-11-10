@@ -6,6 +6,11 @@ const closeButtonElement = pictureWindow.querySelector('.big-picture__cancel');
 const commentsLoader = pictureWindow.querySelector('.comments-loader');
 const bodyElement = document.querySelector('body');
 
+// Временные переменные для обеспечения работоспособности функций openPictureWindow,
+// loadingComments и удаления обработчика по клику
+let temporaryСommentsArr = [];
+let temporaryCommentsСount = 5;
+
 // Закрытие окна по нажатию клавиши Esc
 function onDocumentKeydown (evt) {
   if (isEscapeKey(evt)) {
@@ -20,41 +25,46 @@ function openPictureWindow (url, description, likes, comments) {
   bodyElement.classList.add('modal-open');
   document.addEventListener('keydown', onDocumentKeydown);
 
+  temporaryСommentsArr = comments;
+
   pictureWindow.querySelector('img').src = url;
   pictureWindow.querySelector('.likes-count').textContent = likes;
   pictureWindow.querySelector('.social__caption').textContent = description;
-  pictureWindow.querySelector('.social__comment-total-count').textContent = comments.length;
+  pictureWindow.querySelector('.social__comment-total-count').textContent = temporaryСommentsArr.length;
 
-  let temporaryCommentСount = 5;
-
-  if (comments.length <= 5) {
-    renderComments(comments);
-    pictureWindow.querySelector('.social__comment-shown-count').textContent = comments.length;
+  if (temporaryСommentsArr.length <= 5) {
+    renderComments(temporaryСommentsArr);
+    pictureWindow.querySelector('.social__comment-shown-count').textContent = temporaryСommentsArr.length;
   } else {
-    const slicedArr = comments.slice(0, 5);
+    const slicedArr = temporaryСommentsArr.slice(0, 5);
     renderComments(slicedArr);
     pictureWindow.querySelector('.social__comment-shown-count').textContent = 5;
   }
 
-  commentsLoader.addEventListener('click', () => {
-    if (comments.length - temporaryCommentСount < 0) {
-      const slicedArr = comments.slice(0, comments.length);
-      renderComments(slicedArr);
-      pictureWindow.querySelector('.social__comment-shown-count').textContent = comments.length;
-    } else {
-      const slicedArr = comments.slice(0, temporaryCommentСount);
-      renderComments(slicedArr);
-      pictureWindow.querySelector('.social__comment-shown-count').textContent = temporaryCommentСount;
-      temporaryCommentСount += 5;
-    }
-  });
+  commentsLoader.addEventListener('click', loadingComments);
 }
 
-// Закрытие большого окна карточки
+// Загрузка новых комментариев
+function loadingComments () {
+  temporaryCommentsСount += 5;
+  if (temporaryСommentsArr.length - temporaryCommentsСount <= 0) {
+    const slicedArr = temporaryСommentsArr.slice(0, temporaryСommentsArr.length);
+    renderComments(slicedArr);
+    pictureWindow.querySelector('.social__comment-shown-count').textContent = temporaryСommentsArr.length;
+  } else {
+    const slicedArr = temporaryСommentsArr.slice(0, temporaryCommentsСount);
+    renderComments(slicedArr);
+    pictureWindow.querySelector('.social__comment-shown-count').textContent = temporaryCommentsСount;
+  }
+}
+
+// Закрытие большого окна карточки и удаление обработчиков
 function closePictureWindow () {
   pictureWindow.classList.add('hidden');
   bodyElement.classList.remove('modal-open');
   document.removeEventListener('keydown', onDocumentKeydown);
+  commentsLoader.removeEventListener('click', loadingComments);
+  temporaryCommentsСount = 5;
 }
 
 closeButtonElement.addEventListener('click', closePictureWindow);
