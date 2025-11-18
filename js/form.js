@@ -41,6 +41,8 @@ function closeForm () {
   textDescriptionInput.removeEventListener('keydown', cancelEscKeydown);
   textHashtagsInput.removeEventListener('keydown', cancelEscKeydown);
   imgUploadInput.value = '';
+  textDescriptionInput.value = '';
+  textHashtagsInput.value = '';
 }
 
 function cancelEscKeydown (event) {
