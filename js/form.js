@@ -1,11 +1,12 @@
 import {isEscapeKey} from './util.js';
 import {validateComment, validateHashtags} from './validate-form.js';
+import {VALIDATE_COMMENT_ERROR, VALIDATE_HASHTAGS_ERROR} from './data.js';
 
-const imgUploadInput = document.querySelector('.img-upload__input');
-const formModal = document.querySelector('.img-upload__overlay');
-const bodyElement = document.querySelector('body');
-const closeImgElement = document.querySelector('.img-upload__cancel');
 const form = document.querySelector('.img-upload__form');
+const imgUploadInput = form.querySelector('.img-upload__input');
+const formModal = form.querySelector('.img-upload__overlay');
+const bodyElement = document.querySelector('body');
+const closeImgElement = form.querySelector('.img-upload__cancel');
 const textDescriptionInput = form.querySelector('.text__description');
 const textHashtagsInput = form.querySelector('.text__hashtags');
 
@@ -40,9 +41,7 @@ function closeForm () {
   document.removeEventListener('keydown', onDocumentKeydown);
   textDescriptionInput.removeEventListener('keydown', cancelEscKeydown);
   textHashtagsInput.removeEventListener('keydown', cancelEscKeydown);
-  imgUploadInput.value = '';
-  textDescriptionInput.value = '';
-  textHashtagsInput.value = '';
+  form.reset();
 }
 
 function cancelEscKeydown (event) {
@@ -52,8 +51,8 @@ function cancelEscKeydown (event) {
   }
 }
 
-pristine.addValidator(textDescriptionInput, validateComment, 'Максимальная длинна комментария 140 символов');
-pristine.addValidator(textHashtagsInput, validateHashtags, 'Неверный хэштэг');
+pristine.addValidator(textDescriptionInput, validateComment, VALIDATE_COMMENT_ERROR);
+pristine.addValidator(textHashtagsInput, validateHashtags, VALIDATE_HASHTAGS_ERROR);
 
 form.addEventListener('submit', (event) => {
   const valid = pristine.validate();
