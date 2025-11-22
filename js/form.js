@@ -1,6 +1,8 @@
 import {isEscapeKey} from './util.js';
 import {validateComment, validateHashtags} from './validate-form.js';
 import {VALIDATE_COMMENT_ERROR, VALIDATE_HASHTAGS_ERROR} from './data.js';
+import { minusScale, plusScale, resetScale } from './scale.js';
+import { onEffectRadioButtonClick, resetFilter } from './slider-effects.js';
 
 const form = document.querySelector('.img-upload__form');
 const imgUploadInput = form.querySelector('.img-upload__input');
@@ -9,6 +11,9 @@ const bodyElement = document.querySelector('body');
 const closeImgElement = form.querySelector('.img-upload__cancel');
 const textDescriptionInput = form.querySelector('.text__description');
 const textHashtagsInput = form.querySelector('.text__hashtags');
+const minusButton = form.querySelector('.scale__control--smaller');
+const plusButton = form.querySelector('.scale__control--bigger');
+const effectsList = form.querySelector('.effects__list');
 
 const pristine = new Pristine(form, {
   classTo: 'img-upload__form',
@@ -33,6 +38,8 @@ function openForm () {
   document.addEventListener('keydown', onDocumentKeydown);
   textDescriptionInput.addEventListener('keydown', cancelEscKeydown);
   textHashtagsInput.addEventListener('keydown', cancelEscKeydown);
+  resetScale();
+  resetFilter();
 }
 
 function closeForm () {
@@ -51,9 +58,6 @@ function cancelEscKeydown (event) {
   }
 }
 
-pristine.addValidator(textDescriptionInput, validateComment, VALIDATE_COMMENT_ERROR);
-pristine.addValidator(textHashtagsInput, validateHashtags, VALIDATE_HASHTAGS_ERROR);
-
 form.addEventListener('submit', (event) => {
   const valid = pristine.validate();
 
@@ -61,5 +65,12 @@ form.addEventListener('submit', (event) => {
     event.preventDefault();
   }
 });
+
+minusButton.addEventListener('click', minusScale);
+plusButton.addEventListener('click', plusScale);
+effectsList.addEventListener('change', onEffectRadioButtonClick);
+
+pristine.addValidator(textDescriptionInput, validateComment, VALIDATE_COMMENT_ERROR);
+pristine.addValidator(textHashtagsInput, validateHashtags, VALIDATE_HASHTAGS_ERROR);
 
 export {openForm, imgUploadInput};
