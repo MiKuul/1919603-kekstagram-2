@@ -6,4 +6,4 @@ const dataArr = generatePictureArr();
 
 renderPictures(dataArr);
 
-imgUploadInput.addEventListener('click', openForm);
+imgUploadInput.addEventListener('change', openForm);
