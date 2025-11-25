@@ -1,5 +1,4 @@
 import { Effects, StyleFilterByEffects, getEffectSelector } from './slider-settings.js';
-import {EFFECT_LEVEL_MAX} from './data.js';
 
 const form = document.querySelector('.img-upload__form');
 const sliderInputWrapper = form.querySelector('.img-upload__effect-level');
@@ -8,7 +7,6 @@ const sliderElement = form.querySelector('.effect-level__slider');
 const effectRadioButtons = form.querySelectorAll('.effects__radio');
 const imgPreview = form.querySelector('.img-upload__preview').firstElementChild;
 const selectorImg = imgPreview.classList;
-levelInput.value = EFFECT_LEVEL_MAX;
 
 function getUpdateSliderOptions (effect, slider) {
   return slider.noUiSlider.updateOptions(Effects[effect]);
