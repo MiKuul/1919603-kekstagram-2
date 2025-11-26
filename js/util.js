@@ -3,6 +3,7 @@ function isEscapeKey (evt) {
   return evt.key === 'Escape';
 }
 
+// Остановка обработчика Esc
 function cancelEscKeydown (evt) {
   if (evt.key === 'Escape' || evt.keyCode === 27) {
     evt.preventDefault();

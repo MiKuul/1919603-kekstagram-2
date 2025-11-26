@@ -7,7 +7,7 @@ const VALIDATE_COMMENT_ERROR = 'Максимальная длинна комме
 
 const VALIDATE_HASHTAGS_ERROR = 'Неверный хэштэг';
 
-const BASE_URL = 'https://31.javascript.htmlacademy.pro/kekstagram';
+const MAIN_URL = 'https://31.javascript.htmlacademy.pro/kekstagram';
 const STATUS_SUCCESS = 200;
 
 const Route = {
@@ -33,7 +33,7 @@ export {
   SCALE_MAX,
   SCALE_MIN,
   SCALE_STEP,
-  BASE_URL,
+  MAIN_URL,
   STATUS_SUCCESS,
   Route,
   Method,

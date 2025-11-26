@@ -1,9 +1,9 @@
 // функции загрзки данных, их получения и отправки
-import {BASE_URL, STATUS_SUCCESS, Route, Method, ErrorMessage} from './data.js';
+import {MAIN_URL, STATUS_SUCCESS, Route, Method, ErrorMessage} from './data.js';
 
 async function loadData (route, error, method = Method.GET, body = null) {
   try {
-    const response = await fetch(`${BASE_URL}${route}`, {method, body});
+    const response = await fetch(`${MAIN_URL}${route}`, {method, body});
     if (response.status !== STATUS_SUCCESS) {
       throw new Error();
     }

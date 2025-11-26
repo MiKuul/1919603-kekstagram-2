@@ -1,7 +1,7 @@
 import {isEscapeKey, cancelEscKeydown} from './util.js';
 import {validateComment, validateHashtags} from './validate-form.js';
 import {VALIDATE_COMMENT_ERROR, VALIDATE_HASHTAGS_ERROR} from './data.js';
-import {minusScale, plusScale, resetScale} from './scale.js';
+import {minusScale, plusScale, resetScale} from './pitures-scale.js';
 import {onEffectRadioButtonClick, resetFilter} from './slider-effects.js';
 import {sendData} from './api.js';
 import {addInfo} from './messages.js';
@@ -9,8 +9,8 @@ import {addInfo} from './messages.js';
 const form = document.querySelector('.img-upload__form');
 const imgUploadInput = form.querySelector('.img-upload__input');
 const formModal = form.querySelector('.img-upload__overlay');
-const bodyElement = document.querySelector('body');
-const closeImgElement = form.querySelector('.img-upload__cancel');
+const body = document.querySelector('body');
+const closeImgButton = form.querySelector('.img-upload__cancel');
 const textDescriptionInput = form.querySelector('.text__description');
 const textHashtagsInput = form.querySelector('.text__hashtags');
 const minusButton = form.querySelector('.scale__control--smaller');
@@ -38,9 +38,11 @@ function onDocumentKeydown (evt) {
 // открытие формы загрузки изображения
 function openForm () {
   formModal.classList.remove('hidden');
-  bodyElement.classList.add('modal-open');
-  closeImgElement.addEventListener('click', closeForm);
+  body.classList.add('modal-open');
+
   document.addEventListener('keydown', onDocumentKeydown);
+
+  closeImgButton.addEventListener('click', closeForm);
   textDescriptionInput.addEventListener('keydown', cancelEscKeydown);
   textHashtagsInput.addEventListener('keydown', cancelEscKeydown);
 }
@@ -48,10 +50,13 @@ function openForm () {
 // закрытие формы и удаление обработчиков, а так же очистка формы
 function closeForm () {
   formModal.classList.add('hidden');
-  bodyElement.classList.remove('modal-open');
+  body.classList.remove('modal-open');
+
   document.removeEventListener('keydown', onDocumentKeydown);
+
   textDescriptionInput.removeEventListener('keydown', cancelEscKeydown);
   textHashtagsInput.removeEventListener('keydown', cancelEscKeydown);
+
   form.reset();
   resetScale();
   resetFilter();
