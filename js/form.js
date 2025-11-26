@@ -1,4 +1,4 @@
-import {isEscapeKey, cancelEscKeydown} from './util.js';
+import {isEscapeKey, cancelEscKeydown} from './utils.js';
 import {validateComment, validateHashtags} from './validate-form.js';
 import {VALIDATE_COMMENT_ERROR, VALIDATE_HASHTAGS_ERROR} from './data.js';
 import {minusScale, plusScale, resetScale} from './pitures-scale.js';

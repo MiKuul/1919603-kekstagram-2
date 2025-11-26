@@ -1,4 +1,4 @@
-import {isEscapeKey} from './util.js';
+import {isEscapeKey} from './utils.js';
 import {renderComments} from './render-picture-comments.js';
 
 const pictureModal = document.querySelector('.big-picture');

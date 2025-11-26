@@ -1,4 +1,4 @@
-import {isEscapeKey} from './util.js';
+import {isEscapeKey} from './utils.js';
 import {ERROR_SHOW_TIME} from './data.js';
 
 const body = document.querySelector('body');

@@ -1,5 +1,4 @@
 // настройки эффектов слайдера
-
 const sliderOptionsChromeSepiaEffect = {
   range: {
     min: 0,
