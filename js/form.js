@@ -1,8 +1,8 @@
 import {isEscapeKey, cancelEscKeydown} from './util.js';
 import {validateComment, validateHashtags} from './validate-form.js';
 import {VALIDATE_COMMENT_ERROR, VALIDATE_HASHTAGS_ERROR} from './data.js';
-import { minusScale, plusScale, resetScale } from './scale.js';
-import { onEffectRadioButtonClick, resetFilter } from './slider-effects.js';
+import {minusScale, plusScale, resetScale} from './scale.js';
+import {onEffectRadioButtonClick, resetFilter} from './slider-effects.js';
 import {sendData} from './api.js';
 import {addInfo} from './messages.js';
 
