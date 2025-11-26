@@ -85,4 +85,4 @@ function getEffectSelector (inputId) {
   return selectors[inputId];
 }
 
-export { Effects, StyleFilterByEffects, getEffectSelector };
+export {Effects, StyleFilterByEffects, getEffectSelector};

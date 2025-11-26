@@ -1,5 +1,5 @@
 // Применение эффектов в форме загрузки изображения с помощью библиотеки noUiSlider
-import { effects, styleFilterByEffects, getEffectSelector } from './slider-options.js';
+import {Effects, StyleFilterByEffects, getEffectSelector} from './slider-options.js';
 
 const form = document.querySelector('.img-upload__form');
 const sliderInputWrapper = form.querySelector('.img-upload__effect-level');
@@ -10,7 +10,7 @@ const imgPreview = form.querySelector('.img-upload__preview').firstElementChild;
 const selectorImg = imgPreview.classList;
 
 function getUpdateSliderOptions (effect, slider) {
-  return slider.noUiSlider.updateOptions(effects[effect]);
+  return slider.noUiSlider.updateOptions(Effects[effect]);
 }
 
 function resetFilter () {
@@ -50,7 +50,7 @@ sliderElement.noUiSlider.on('update', () => {
       if (item.value !== 'none') {
         sliderInputWrapper.classList.remove('hidden');
 
-        imgPreview.style.filter = styleFilterByEffects[item.value](levelInput.value);
+        imgPreview.style.filter = StyleFilterByEffects[item.value](levelInput.value);
       } else {
         resetFilter();
       }
