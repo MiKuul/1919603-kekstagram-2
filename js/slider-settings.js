@@ -36,7 +36,7 @@ const sliderOptionsHeatEffect = {
   step: 0.1
 };
 
-const effects = {
+const Effects = {
   none: sliderOptionsMarvinDefaultEffect,
   chrome: sliderOptionsChromeSepiaEffect,
   sepia: sliderOptionsChromeSepiaEffect,
@@ -65,7 +65,7 @@ function getHeatStyleFilter (value) {
   return `brightness(${value})`;
 }
 
-const styleFilterByEffects = {
+const StyleFilterByEffects = {
   chrome: getChromeStyleFilter,
   sepia: getSepiaStyleFilter,
   marvin: getMarvinStyleFilter,
@@ -85,4 +85,4 @@ function getEffectSelector (currentInputId) {
   return selectors[currentInputId];
 }
 
-export { effects, styleFilterByEffects, getEffectSelector };
+export { Effects, StyleFilterByEffects, getEffectSelector };
