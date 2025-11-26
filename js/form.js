@@ -1,8 +1,10 @@
-import {isEscapeKey} from './util.js';
+import {isEscapeKey, cancelEscKeydown} from './util.js';
 import {validateComment, validateHashtags} from './validate-form.js';
 import {VALIDATE_COMMENT_ERROR, VALIDATE_HASHTAGS_ERROR} from './data.js';
 import { minusScale, plusScale, resetScale } from './scale.js';
 import { onEffectRadioButtonClick, resetFilter } from './slider-effects.js';
+import {sendData} from './api.js';
+import {addInfo} from './messages.js';
 
 const form = document.querySelector('.img-upload__form');
 const imgUploadInput = form.querySelector('.img-upload__input');
@@ -14,6 +16,8 @@ const textHashtagsInput = form.querySelector('.text__hashtags');
 const minusButton = form.querySelector('.scale__control--smaller');
 const plusButton = form.querySelector('.scale__control--bigger');
 const effectsList = form.querySelector('.effects__list');
+const templateSuccess = document.querySelector('#success').content.querySelector('.success');
+const templateError = document.querySelector('#error').content.querySelector('.error');
 
 const pristine = new Pristine(form, {
   classTo: 'img-upload__form',
@@ -31,6 +35,7 @@ function onDocumentKeydown (evt) {
   }
 }
 
+// открытие формы загрузки изображения
 function openForm () {
   formModal.classList.remove('hidden');
   bodyElement.classList.add('modal-open');
@@ -38,10 +43,9 @@ function openForm () {
   document.addEventListener('keydown', onDocumentKeydown);
   textDescriptionInput.addEventListener('keydown', cancelEscKeydown);
   textHashtagsInput.addEventListener('keydown', cancelEscKeydown);
-  resetScale();
-  resetFilter();
 }
 
+// закрытие формы и удаление обработчиков, а так же очистка формы
 function closeForm () {
   formModal.classList.add('hidden');
   bodyElement.classList.remove('modal-open');
@@ -49,22 +53,28 @@ function closeForm () {
   textDescriptionInput.removeEventListener('keydown', cancelEscKeydown);
   textHashtagsInput.removeEventListener('keydown', cancelEscKeydown);
   form.reset();
+  resetScale();
+  resetFilter();
 }
 
-function cancelEscKeydown (event) {
-  if (event.key === 'Escape' || event.keyCode === 27) {
-    event.preventDefault();
-    event.stopPropagation();
-  }
+// отправка формы и добавление уведомления об итогах отправки
+function setFormSubmit () {
+  form.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+    const isValid = pristine.validate();
+
+    if (isValid) {
+      sendData(new FormData(form))
+        .then(() => {
+          addInfo(templateSuccess);
+          closeForm();
+        })
+        .catch (() => {
+          addInfo(templateError);
+        });
+    }
+  });
 }
-
-form.addEventListener('submit', (event) => {
-  const valid = pristine.validate();
-
-  if (valid === false) {
-    event.preventDefault();
-  }
-});
 
 minusButton.addEventListener('click', minusScale);
 plusButton.addEventListener('click', plusScale);
@@ -73,4 +83,4 @@ effectsList.addEventListener('change', onEffectRadioButtonClick);
 pristine.addValidator(textDescriptionInput, validateComment, VALIDATE_COMMENT_ERROR);
 pristine.addValidator(textHashtagsInput, validateHashtags, VALIDATE_HASHTAGS_ERROR);
 
-export {openForm, imgUploadInput};
+export {openForm, imgUploadInput, setFormSubmit};

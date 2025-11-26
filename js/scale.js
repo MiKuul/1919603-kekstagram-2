@@ -1,3 +1,4 @@
+// Масштабирование изображения в форме загрузки изображения
 import {SCALE_MAX, SCALE_MIN, SCALE_STEP} from './data.js';
 
 const form = document.querySelector('.img-upload__form');
