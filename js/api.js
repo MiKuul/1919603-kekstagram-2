@@ -1,7 +1,7 @@
 // функции загрзки данных, их получения и отправки
-import {BASE_URL, STATUS_SUCCESS, ROUTE, METHOD, ERROR_TEXT} from './data.js';
+import {BASE_URL, STATUS_SUCCESS, Route, Method, Error} from './data.js';
 
-async function loadData (route, errorText, method = METHOD.GET, body = null) {
+async function loadData (route, errorText, method = Method.GET, body = null) {
   try {
     const response = await fetch(`${BASE_URL}${route}`, {method, body});
     if (response.status !== STATUS_SUCCESS) {
@@ -14,11 +14,11 @@ async function loadData (route, errorText, method = METHOD.GET, body = null) {
 }
 
 function getData () {
-  return loadData(ROUTE.GET_DATA, ERROR_TEXT.GET_DATA);
+  return loadData(Route.GET_DATA, Error.GET_DATA);
 }
 
 function sendData (body) {
-  return loadData(ROUTE.SEND_DATA, ERROR_TEXT.SEND_DATA, METHOD.POST, body);
+  return loadData(Route.SEND_DATA, Error.SEND_DATA, Method.POST, body);
 }
 
 export {getData, sendData};

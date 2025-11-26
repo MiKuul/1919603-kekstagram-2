@@ -10,17 +10,17 @@ const VALIDATE_HASHTAGS_ERROR = 'Неверный хэштэг';
 const BASE_URL = 'https://31.javascript.htmlacademy.pro/kekstagram';
 const STATUS_SUCCESS = 200;
 
-const ROUTE = {
+const Route = {
   GET_DATA: '/data',
   SEND_DATA: '/',
 };
 
-const METHOD = {
+const Method = {
   GET: 'GET',
   POST: 'POST',
 };
 
-const ERROR_TEXT = {
+const Error = {
   GET_DATA: 'Не удалось загрузить данные. Попробуйте обновить страницу',
   SEND_DATA: 'Не удалось отправить форму. Попробуйте ещё раз',
 };
@@ -35,8 +35,8 @@ export {
   SCALE_STEP,
   BASE_URL,
   STATUS_SUCCESS,
-  ROUTE,
-  METHOD,
-  ERROR_TEXT,
+  Route,
+  Method,
+  Error,
   ALERT_SHOW_TIME
 };
