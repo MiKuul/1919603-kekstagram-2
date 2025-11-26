@@ -1,5 +1,5 @@
 import {isEscapeKey} from './util.js';
-import {ALERT_SHOW_TIME} from './data.js';
+import {ERROR_SHOW_TIME} from './data.js';
 
 const body = document.querySelector('body');
 const main = document.querySelector('main');
@@ -30,19 +30,19 @@ function addInfo (template) {
 }
 
 // окно предупреждения об ошибке загрузки данных
-const showAlertMessage = (message) => {
-  const alertElemet = document.createElement('div');
-  alertElemet.style.backgroundColor = 'red';
-  alertElemet.style.textAlign = 'center';
-  alertElemet.style.padding = '5px 0px';
+const showErrorMessage = (message) => {
+  const error = document.createElement('div');
+  error.style.backgroundColor = 'red';
+  error.style.textAlign = 'center';
+  error.style.padding = '5px 0px';
 
-  alertElemet.textContent = message;
+  error.textContent = message;
 
-  main.prepend(alertElemet);
+  main.prepend(error);
 
   setTimeout(() => {
-    alertElemet.remove();
-  }, ALERT_SHOW_TIME);
+    error.remove();
+  }, ERROR_SHOW_TIME);
 };
 
-export {addInfo, showAlertMessage};
+export {addInfo, showErrorMessage};

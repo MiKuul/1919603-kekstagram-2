@@ -1,5 +1,5 @@
 // функции загрзки данных, их получения и отправки
-import {BASE_URL, STATUS_SUCCESS, Route, Method, Error} from './data.js';
+import {BASE_URL, STATUS_SUCCESS, Route, Method, ErrorMessage} from './data.js';
 
 async function loadData (route, error, method = Method.GET, body = null) {
   try {
@@ -14,11 +14,11 @@ async function loadData (route, error, method = Method.GET, body = null) {
 }
 
 function getData () {
-  return loadData(Route.GET_DATA, Error.GET_DATA);
+  return loadData(Route.GET_ROUTE, ErrorMessage.GET_ERROR);
 }
 
 function sendData (body) {
-  return loadData(Route.SEND_DATA, Error.SEND_DATA, Method.POST, body);
+  return loadData(Route.SEND_ROUTE, ErrorMessage.SEND_ERROR, Method.POST, body);
 }
 
 export {getData, sendData};

@@ -11,8 +11,8 @@ const BASE_URL = 'https://31.javascript.htmlacademy.pro/kekstagram';
 const STATUS_SUCCESS = 200;
 
 const Route = {
-  GET_DATA: '/data',
-  SEND_DATA: '/',
+  GET_ROUTE: '/data',
+  SEND_ROUTE: '/',
 };
 
 const Method = {
@@ -20,12 +20,12 @@ const Method = {
   POST: 'POST',
 };
 
-const Error = {
-  GET_DATA: 'Не удалось загрузить данные. Попробуйте обновить страницу',
-  SEND_DATA: 'Не удалось отправить форму. Попробуйте ещё раз',
+const ErrorMessage = {
+  GET_ERROR: 'Ошибка загрузки данных. Попробуйте обновить страницу или зайти позже.',
+  SEND_ERROR: 'Ошибка отправки формы. Попробуйте отправить форму ещё раз или воспользуйтесь ею позже.',
 };
 
-const ALERT_SHOW_TIME = 5000;
+const ERROR_SHOW_TIME = 5000;
 
 export {
   VALIDATE_COMMENT_ERROR,
@@ -37,6 +37,6 @@ export {
   STATUS_SUCCESS,
   Route,
   Method,
-  Error,
-  ALERT_SHOW_TIME
+  ErrorMessage,
+  ERROR_SHOW_TIME
 };

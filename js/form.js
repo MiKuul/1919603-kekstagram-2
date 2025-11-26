@@ -16,8 +16,8 @@ const textHashtagsInput = form.querySelector('.text__hashtags');
 const minusButton = form.querySelector('.scale__control--smaller');
 const plusButton = form.querySelector('.scale__control--bigger');
 const effectsList = form.querySelector('.effects__list');
-const templateSuccess = document.querySelector('#success').content.querySelector('.success');
-const templateError = document.querySelector('#error').content.querySelector('.error');
+const successMessage = document.querySelector('#success').content.querySelector('.success');
+const errorMessage = document.querySelector('#error').content.querySelector('.error');
 
 const pristine = new Pristine(form, {
   classTo: 'img-upload__form',
@@ -66,11 +66,11 @@ function setFormSubmit () {
     if (isValid) {
       sendData(new FormData(form))
         .then(() => {
-          addInfo(templateSuccess);
+          addInfo(successMessage);
           closeForm();
         })
         .catch (() => {
-          addInfo(templateError);
+          addInfo(errorMessage);
         });
     }
   });
