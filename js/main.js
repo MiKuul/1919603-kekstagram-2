@@ -1,9 +1,16 @@
-import {generatePictureArr} from './main-functions.js';
 import {renderPictures} from './render-pictures.js';
-import {openForm, imgUploadInput} from './form.js';
+import {openForm, imgUploadInput, setFormSubmit} from './form.js';
+import {getData} from './api.js';
+import {showErrorMessage} from './messages.js';
 
-const dataArr = generatePictureArr();
+getData()
+  .then((pictures) => {
+    renderPictures(pictures);
+  })
+  .catch((err) => {
+    showErrorMessage(err.message);
+  });
 
-renderPictures(dataArr);
+setFormSubmit();
 
 imgUploadInput.addEventListener('change', openForm);

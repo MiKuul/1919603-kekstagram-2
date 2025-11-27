@@ -1,3 +1,4 @@
+// настройки эффектов слайдера
 const sliderOptionsChromeSepiaEffect = {
   range: {
     min: 0,
@@ -40,7 +41,7 @@ const Effects = {
   sepia: sliderOptionsChromeSepiaEffect,
   marvin: sliderOptionsMarvinDefaultEffect,
   phobos: sliderOptionsPhobosEffect,
-  heat: sliderOptionsHeatEffect,
+  heat: sliderOptionsHeatEffect
 };
 
 function getChromeStyleFilter (value) {
@@ -71,7 +72,7 @@ const StyleFilterByEffects = {
   heat: getHeatStyleFilter
 };
 
-function getEffectSelector (currentInputId) {
+function getEffectSelector (inputId) {
   const selectors = {
     'effect-none': 'effects__preview--none',
     'effect-chrome': 'effects__preview--chrome',
@@ -80,7 +81,7 @@ function getEffectSelector (currentInputId) {
     'effect-phobos': 'effects__preview--phobos',
     'effect-heat': 'effects__preview--heat'
   };
-  return selectors[currentInputId];
+  return selectors[inputId];
 }
 
-export { Effects, StyleFilterByEffects, getEffectSelector };
+export {Effects, StyleFilterByEffects, getEffectSelector};
