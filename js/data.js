@@ -27,6 +27,14 @@ const ErrorMessage = {
 
 const ERROR_SHOW_TIME = 5000;
 
+const PICTURES_COUNT = 10;
+
+const Filter = {
+  DEFAULT: 'filter-default',
+  RANDOM: 'filter-random',
+  DISCUSSED: 'filter-discussed',
+};
+
 export {
   VALIDATE_COMMENT_ERROR,
   VALIDATE_HASHTAGS_ERROR,
@@ -38,5 +46,7 @@ export {
   Route,
   Method,
   ErrorMessage,
-  ERROR_SHOW_TIME
+  ERROR_SHOW_TIME,
+  PICTURES_COUNT,
+  Filter
 };

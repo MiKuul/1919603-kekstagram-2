@@ -30,7 +30,7 @@ function addInfo (template) {
 }
 
 // окно предупреждения об ошибке загрузки данных
-const showErrorMessage = (message) => {
+function showErrorMessage (message) {
   const error = document.createElement('div');
   error.style.backgroundColor = 'red';
   error.style.textAlign = 'center';
@@ -43,6 +43,6 @@ const showErrorMessage = (message) => {
   setTimeout(() => {
     error.remove();
   }, ERROR_SHOW_TIME);
-};
+}
 
 export {addInfo, showErrorMessage};
